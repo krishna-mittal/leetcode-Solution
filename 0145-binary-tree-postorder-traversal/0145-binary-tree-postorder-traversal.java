@@ -15,6 +15,7 @@
  */
 class Solution {
     public List<Integer> postorderTraversal(TreeNode root) {
+        // Recursive Method
         
         // if(root == null)
         // {
@@ -24,18 +25,40 @@ class Solution {
         // postOrder(root.right);
         // System.out.print(root.data + " ");
         
-        List<Integer> res = new ArrayList<>();
-        travel(res, root);
-        return res;
-    }
-    public static void travel(List<Integer> res, TreeNode node)
-    {
-        if(node == null)
+        // CODE
+        
+    //     List<Integer> res = new ArrayList<>();
+    //     travel(res, root);
+    //     return res;
+    // }
+    // public static void travel(List<Integer> res, TreeNode node)
+    // {
+    //     if(node == null)
+    //     {
+    //         return;
+    //     }
+    //     travel(res, node.left);
+    //     travel(res, node.right);
+    //     res.add(node.val);
+        
+        LinkedList<Integer> ans = new LinkedList<>();
+        Stack<TreeNode> stack = new Stack<>();
+        if(root == null){ return ans;}
+        
+        stack.push(root);
+        while(!stack.isEmpty())
         {
-            return;
+            TreeNode temp = stack.pop();
+            ans.addFirst(temp.val);
+            if(temp.left != null)
+            {
+                stack.push(temp.left);
+            }
+            if(temp.right != null)
+            {
+                stack.push(temp.right);
+            }
         }
-        travel(res, node.left);
-        travel(res, node.right);
-        res.add(node.val);
+        return ans;
     }
 }
